@@ -1,0 +1,25 @@
+format_version: "7"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: bitriseTestApp.xcodeproj
+  - BITRISE_SCHEME: bitriseTestApp
+  - BITRISE_EXPORT_METHOD: development
+  - BITRISE_RUN_EXTERNAL_VARIABLE: Local
+workflows:
+  deploy: {}
+  test:
+    steps:
+    - script@1.1.5:
+        title: Show Final Variable
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            # write your script here
+            echo "$BITRISE_RUN_EXTERNAL_VARIABLE"
